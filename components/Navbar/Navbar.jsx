@@ -3,19 +3,15 @@ import Link from "next/link";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 
 //INTERNAL IMPORT/
-import { VotingContext } from "../../context/voter";
+import { VotingContext } from "../../context/Voter";
 import Style from "./NavBar.module.css";
 
 const NavBar = () => {
   const { connectWallet, error, currentAccount } = useContext(VotingContext);
   const [openNav, setOpenNav] = useState(true);
 
-  const openNaviagtion = () => {
-    if (openNav) {
-      setOpenNav(false);
-    } else if (!openNav) {
-      setOpenNav(true);
-    }
+  const openNavigation = () => {
+    setOpenNav(!openNav);
   };
 
   return (
@@ -35,15 +31,15 @@ const NavBar = () => {
           {currentAccount ? (
             <div>
               <div className={Style.connect_flex}>
-                <button onClick={() => openNaviagtion()}>
+                <button onClick={openNavigation}>
                   {currentAccount.slice(0, 10)}..
                 </button>
                 {currentAccount && (
                   <span>
                     {openNav ? (
-                      <AiFillUnlock onClick={() => openNaviagtion()} />
+                      <AiFillUnlock onClick={openNavigation} />
                     ) : (
-                      <AiFillLock onClick={() => openNaviagtion()} />
+                      <AiFillLock onClick={openNavigation} />
                     )}
                   </span>
                 )}
@@ -73,7 +69,7 @@ const NavBar = () => {
               )}
             </div>
           ) : (
-            <button onClick={() => connectWallet()}>Connect Wallet</button>
+            <button onClick={connectWallet}>Connect Wallet</button>
           )}
         </div>
       </div>
@@ -82,3 +78,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

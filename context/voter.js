@@ -3,8 +3,6 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
-
-//INTERNAL IMPORT
 import { VotingAddress, VotingAddressABI } from "./constants";
 
 const fetchContract = (signerOrProvider) =>
@@ -16,17 +14,11 @@ export const VotingProvider = ({ children }) => {
   const router = useRouter();
   const [currentAccount, setCurrentAccount] = useState("");
   const [candidateLength, setCandidateLength] = useState("");
-  const pushCandidate = [];
-  const candidateIndex = [];
-  const [candidateArray, setCandidateArray] = useState(pushCandidate);
-  // =========================================================
-  //---ERROR Message
+  const [candidateArray, setCandidateArray] = useState([]);
   const [error, setError] = useState("");
-  const higestVote = [];
-
-  const pushVoter = [];
-  const [voterArray, setVoterArray] = useState(pushVoter);
+  const [voterArray, setVoterArray] = useState([]);
   const [voterLength, setVoterLength] = useState("");
+
   const [voterAddress, setVoterAddress] = useState([]);
   ///CONNECTING METAMASK
   const checkIfWalletIsConnected = async () => {
@@ -275,12 +267,10 @@ export const VotingProvider = ({ children }) => {
         setCandidate,
         getNewCandidate,
         giveVote,
-        pushCandidate,
         candidateArray,
         uploadToIPFSCandidate,
         getAllVoterData,
         voterArray,
-        giveVote,
         checkIfWalletIsConnected,
         error,
         candidateLength,
